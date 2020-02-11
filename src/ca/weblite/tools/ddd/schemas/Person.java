@@ -11,7 +11,7 @@ import ca.weblite.tools.ddd.Tag;
  * From https://schema.org/Person
  * @author shannah
  */
-public class Person extends Thing {
+public interface Person extends Thing {
     public static final Tag additionalName = new Tag("additionalName");
     public static final Tag address = new Tag("address");
     public static final Tag affiliation = new Tag("affiliation");

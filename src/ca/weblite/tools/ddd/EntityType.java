@@ -124,6 +124,128 @@ public class EntityType implements Iterable<Property> {
         return new Tags(atts);
     }
     
+    public Property findProperty(Tag... tags) {
+        for (Tag tag : tags) {
+            for (Property prop : propertiesSet) {
+                if (prop.getTags().contains(tag)) {
+                    return prop;
+                }
+            }
+        }
+        return null;
+    }
+    
+    public Object getPropertyValue(Property prop, Entity entity, ContentType outputType) {
+        return ContentType.convert(prop.getContentType(), prop.getValue(entity), outputType);
+    }
+    
+    public String getText(Property prop, Entity entity) {
+        return (String)getPropertyValue(prop, entity, ContentType.Text);
+    }
+    
+    public Integer getInt(Property prop, Entity entity) {
+        return (Integer)getPropertyValue(prop, entity, ContentType.IntegerType);
+    }
+    
+    public Double getDouble(Property prop, Entity entity) {
+        return (Double)getPropertyValue(prop, entity, ContentType.DoubleType);
+    }
+    
+    public Float getFloat(Property prop, Entity entity) {
+        return (Float)getPropertyValue(prop, entity, ContentType.FloatType);
+    }
+    
+    public Boolean getBoolean(Property prop, Entity entity) {
+        return (Boolean)getPropertyValue(prop, entity, ContentType.BooleanType);
+    }
+    
+    public Object getPropertyValue(Tag tag, Entity entity, ContentType outputType) {
+        Property prop = findProperty(tag);
+        if (prop == null) {
+            return null;
+        }
+        return getPropertyValue(prop, entity, outputType);
+    }
+    
+    public Object getPropertyValue(Entity entity, ContentType outputType, Tag... tags) {
+        for (Tag tag : tags) {
+            Property prop = findProperty(tag);
+            if (prop == null) {
+                continue;
+            }
+            return getPropertyValue(prop, entity, outputType);
+        }
+        return null;
+    }
+    
+     public Object getPropertyValue(Tag tag, Entity entity, ContentType outputType, Object defaultVal) {
+        Property prop = findProperty(tag);
+        if (prop == null) {
+            return defaultVal;
+        }
+        return getPropertyValue(prop, entity, outputType);
+    }
+    
+    public String getText(Tag tag, Entity entity) {
+        return (String)getPropertyValue(tag, entity, ContentType.Text);
+    }
+    
+    public String getText(Entity entity, Tag... tags) {
+        return (String)getPropertyValue(entity, ContentType.Text, tags);
+    }
+    
+    public Integer getInt(Tag prop, Entity entity) {
+        return (Integer)getPropertyValue(prop, entity, ContentType.IntegerType);
+    }
+    
+    public Integer getInt(Entity entity, Tag... tags) {
+        return (Integer)getPropertyValue(entity, ContentType.IntegerType, tags);
+    }
+    
+    public Double getDouble(Entity entity, Tag... tags) {
+        return (Double)getPropertyValue(entity, ContentType.DoubleType, tags);
+    }
+    
+    public Double getDouble(Tag prop, Entity entity) {
+        return (Double)getPropertyValue(prop, entity, ContentType.DoubleType);
+    }
+    
+    public Float getFloat(Tag prop, Entity entity) {
+        return (Float)getPropertyValue(prop, entity, ContentType.FloatType);
+    }
+    
+    public Float getFloat(Entity entity, Tag... tags) {
+        return (Float)getPropertyValue(entity, ContentType.FloatType, tags);
+    }
+    
+    public Boolean getBoolean(Tag prop, Entity entity) {
+        return (Boolean)getPropertyValue(prop, entity, ContentType.BooleanType);
+    }
+    
+    public Boolean getBoolean(Entity entity, Tag... tags) {
+        return (Boolean)getPropertyValue(entity, ContentType.BooleanType, tags);
+    }
+    
+    public String getText(Tag tag, Entity entity, String defaultVal) {
+        return (String)getPropertyValue(tag, entity, ContentType.Text, defaultVal);
+    }
+    
+     public Integer getInt(Tag prop, Entity entity, Integer defaultVal) {
+        return (Integer)getPropertyValue(prop, entity, ContentType.IntegerType, defaultVal);
+    }
+    
+    public Double getDouble(Tag prop, Entity entity, Double defaultVal) {
+        return (Double)getPropertyValue(prop, entity, ContentType.DoubleType, defaultVal);
+    }
+    
+    public Float getFloat(Tag prop, Entity entity, Float defaultVal) {
+        return (Float)getPropertyValue(prop, entity, ContentType.FloatType, defaultVal);
+    }
+    
+    public Boolean getBoolean(Tag prop, Entity entity, Boolean defaultVal) {
+        return (Boolean)getPropertyValue(prop, entity, ContentType.BooleanType, defaultVal);
+    }
+    
 
     private boolean frozen;
     void freeze() {

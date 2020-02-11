@@ -11,7 +11,7 @@ import ca.weblite.tools.ddd.Tag;
  *
  * @author shannah
  */
-public class Event extends Thing {
+public interface Event extends Thing {
     public static final Tag about = new Tag(),
             actor = new Tag(),
             aggregateRating = new Tag(),

@@ -6,6 +6,7 @@
 package ca.weblite.tools.ddd;
 
 import ca.weblite.tools.ddd.Property.Name;
+import com.codename1.ui.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -183,6 +184,24 @@ public class ContentType<T> {
     public static final ContentType<Double> DoubleType = new ContentType<Double>(new Name("Double"), Double.class){};
     public static final ContentType<Entity> EntityType = new ContentType<Entity>(new Name("Entity"), Entity.class){};
     public static final ContentType<EntityList> EntityListType = new ContentType<EntityList>(new Name("EntityList"), EntityList.class);
+    public static <V> ContentType<V> createObjectType(Class<V> representationClass) {
+        return new ContentType<V>(new Name(representationClass.getName()), representationClass) {
+            @Override
+            public boolean equals(Object obj) {
+                return obj.getClass() == this.getClass() && ((ContentType)obj).getRepresentationClass() == representationClass;
+                
+            }
+
+            @Override
+            public int hashCode() {
+                return representationClass.hashCode();
+            }
+            
+            
+            
+        };
+    }
+    
     
     
             

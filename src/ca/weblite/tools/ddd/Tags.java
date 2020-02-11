@@ -54,4 +54,12 @@ public class Tags extends Attribute<Tag[]> implements Iterable<Tag> {
         return false;
     }
     
+    public boolean contains(Tag tag) {
+        return tags.contains(tag);
+    }
+    
+    public Tag[] toArray() {
+        return tags.toArray(new Tag[tags.size()]);
+    }
+    
 }

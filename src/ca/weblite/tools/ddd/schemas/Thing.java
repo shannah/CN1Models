@@ -11,7 +11,7 @@ import ca.weblite.tools.ddd.Tag;
  *
  * @author shannah
  */
-public class Thing {
+public interface Thing {
     public static final Tag additionalType = new Tag(),
             alternateName = new Tag(),
             description = new Tag(),
